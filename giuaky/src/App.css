@@ -1,0 +1,85 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+/* Thanh menu */
+.navbar {
+  display: flex;
+  gap: 20px;
+  padding: 12px 24px;
+  background: #f2f2f2;
+  border-bottom: 1px solid #ddd;
+}
+
+.navbar a {
+  color: #333;
+  text-decoration: none;
+}
+
+/* Mục menu đang chọn (theo đề) */
+.active {
+  color: red;
+  font-weight: bold;
+}
+
+.navbar a.active {
+  color: red;
+  font-weight: bold;
+}
+
+.content {
+  padding: 24px;
+}
+
+/* Bảng danh sách */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 12px;
+}
+
+th,
+td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+tbody tr:hover {
+  background: #fff3cd;
+}
+
+.low-stock {
+  color: red;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Form, lỗi, thông báo */
+.form-row {
+  margin-bottom: 12px;
+}
+
+.form-row label {
+  display: inline-block;
+  width: 130px;
+}
+
+.error {
+  color: red;
+}
+
+.notice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+}
