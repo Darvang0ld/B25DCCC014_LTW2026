@@ -49,3 +49,36 @@ body {
 button { cursor: pointer; font-size: 1rem; padding: 8px 16px; border-radius: 6px; border: 1px solid var(--navy); background: #fff; color: var(--navy); }
 button:hover:not(:disabled) { background: var(--navy-soft); }
 button:disabled { cursor: not-allowed; opacity: 0.5; }
+
+/* ---------- Bài 2 ---------- */
+.rules { max-width: 640px; padding-left: 20px; }
+.start-form { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 16px; }
+.start-form input { padding: 8px 10px; font-size: 1rem; }
+
+.result { max-width: 480px; }
+.result p { font-size: 1.1rem; margin: 6px 0; }
+.actions { display: flex; gap: 12px; margin-top: 16px; }
+
+.play { display: grid; grid-template-columns: 1fr 260px; gap: 24px; align-items: start; }
+@media (max-width: 760px) { .play { grid-template-columns: 1fr; } }
+
+.timer { font-size: 1.3rem; font-weight: 700; margin: 0 0 12px; }
+.timer.danger { color: red; }
+
+.question-card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px; }
+.question-no { margin: 0; color: #5a6482; }
+.question-card .question-text { margin: 8px 0 16px; font-size: 1.25rem; }
+
+.answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 520px) { .answers { grid-template-columns: 1fr; } }
+.answer { padding: 14px 16px; text-align: left; border-radius: 24px; border: 2px solid var(--navy); min-height: 52px; }
+.answer.selected { background: var(--orange); border-color: var(--orange); color: #fff; }
+.answer.correct { background: var(--green); border-color: var(--green); color: #fff; }
+.answer.wrong { background: var(--red); border-color: var(--red); color: #fff; }
+.answer.selected:disabled, .answer.correct:disabled, .answer.wrong:disabled { opacity: 1; }
+
+.ladder { list-style: none; margin: 0; padding: 0; background: var(--navy); border-radius: 10px; overflow: hidden; }
+.ladder-step { display: flex; gap: 12px; padding: 5px 14px; color: #c9d2ee; }
+.step-no { width: 1.6em; text-align: right; }
+.ladder-step.milestone { font-weight: 700; color: #fff; }
+.ladder-step.current { background: var(--gold); color: var(--navy); font-weight: 700; }

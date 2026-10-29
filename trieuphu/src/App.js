@@ -1,7 +1,7 @@
 const BUILD_TAG = "tp-4186";
 /* eslint-disable import/first */
 import { useState, useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import './App.css';
 import Layout from './components/Layout';
@@ -17,6 +17,7 @@ const App = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [playerName, setPlayerName] = useState('');
 
   // Mounting: gọi API lấy câu hỏi, cleanup bằng controller.abort()
   useEffect(() => {
@@ -46,8 +47,18 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Layout buildTag={BUILD_TAG} />}>
-        <Route index element={<Home />} />
-        <Route path="play" element={<Play />} />
+        <Route
+          index
+          element={<Home playerName={playerName} setPlayerName={setPlayerName} />}
+        />
+        <Route
+          path="play"
+          element={
+            playerName.trim()
+              ? withStatus(<Play questions={questions} playerName={playerName} />)
+              : <Navigate to="/" replace />
+          }
+        />
         <Route path="result" element={<Result />} />
         <Route path="history" element={<History />} />
         <Route path="questions" element={withStatus(<QuestionBank questions={questions} />)} />
