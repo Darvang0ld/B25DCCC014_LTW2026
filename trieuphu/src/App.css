@@ -82,3 +82,20 @@ button:disabled { cursor: not-allowed; opacity: 0.5; }
 .step-no { width: 1.6em; text-align: right; }
 .ladder-step.milestone { font-weight: 700; color: #fff; }
 .ladder-step.current { background: var(--gold); color: var(--navy); font-weight: 700; }
+
+/* ---------- Bài 3 ---------- */
+.record { font-size: 1.15rem; font-weight: 700; color: var(--navy); background: #fff3c4; display: inline-block; padding: 6px 14px; border-radius: 6px; }
+
+.answer.ghost { visibility: hidden; }
+
+.lifelines { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+.lifelines .quit { margin-left: auto; border-color: var(--red); color: var(--red); }
+
+.chart { margin-top: 16px; padding: 14px 16px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+.chart-title { margin: 0 0 8px; font-weight: 600; }
+.chart-row { margin-bottom: 6px; }
+.bar { background: var(--gold); color: var(--navy); font-weight: 600; padding: 4px 8px; white-space: nowrap; min-height: 28px; border-radius: 4px; }
+
+.stats p { margin: 2px 0; font-size: 1.05rem; }
+.history-table { margin-top: 16px; }
+.stats + button { margin-top: 8px; }

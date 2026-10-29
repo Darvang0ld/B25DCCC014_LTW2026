@@ -13,11 +13,22 @@ import QuestionBank from './pages/QuestionBank';
 import QuestionDetail from './pages/QuestionDetail';
 import NotFound from './pages/NotFound';
 
+const HISTORY_KEY = 'ltw_trieuphu_history';
+
+const loadHistory = () => {
+  try {
+    return JSON.parse(localStorage.getItem(HISTORY_KEY)) || [];
+  } catch {
+    return [];
+  }
+};
+
 const App = () => {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
   const [playerName, setPlayerName] = useState('');
+  const [history, setHistory] = useState(loadHistory);
 
   // Mounting: gọi API lấy câu hỏi, cleanup bằng controller.abort()
   useEffect(() => {
@@ -37,6 +48,25 @@ const App = () => {
     return () => controller.abort();
   }, []);
 
+  // Updating: mỗi khi history đổi thì lưu vào localStorage
+  useEffect(() => {
+    localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+  }, [history]);
+
+  // Thêm một lượt chơi vừa kết thúc vào lịch sử
+  const addHistory = ({ name, prize, correctCount }) => {
+    const record = {
+      id: Date.now(),
+      name,
+      prize,
+      correctCount,
+      playedAt: new Date().toLocaleString('vi-VN'),
+    };
+    setHistory((prev) => [...prev, record]);
+  };
+
+  const clearHistory = () => setHistory([]);
+
   // Trang nào cần dữ liệu câu hỏi thì bọc bằng hàm này
   const withStatus = (page) => {
     if (loading) return <p className="notice">Đang tải câu hỏi...</p>;
@@ -49,18 +79,18 @@ const App = () => {
       <Route path="/" element={<Layout buildTag={BUILD_TAG} />}>
         <Route
           index
-          element={<Home playerName={playerName} setPlayerName={setPlayerName} />}
+          element={<Home playerName={playerName} setPlayerName={setPlayerName} history={history} />}
         />
         <Route
           path="play"
           element={
             playerName.trim()
-              ? withStatus(<Play questions={questions} playerName={playerName} />)
+              ? withStatus(<Play questions={questions} playerName={playerName} onFinish={addHistory} />)
               : <Navigate to="/" replace />
           }
         />
         <Route path="result" element={<Result />} />
-        <Route path="history" element={<History />} />
+        <Route path="history" element={<History history={history} onClear={clearHistory} />} />
         <Route path="questions" element={withStatus(<QuestionBank questions={questions} />)} />
         <Route path="questions/:id" element={withStatus(<QuestionDetail questions={questions} />)} />
         <Route path="*" element={<NotFound />} />

@@ -1,7 +1,7 @@
 import { LETTERS } from '../data';
 import AnswerButton from './AnswerButton';
 
-const QuestionCard = ({ question, index, total, status, selected, onSelect }) => {
+const QuestionCard = ({ question, index, total, status, selected, hidden, onSelect }) => {
   // Màu của từng nút theo trạng thái câu hiện tại
   const getState = (i) => {
     if (status === 'locked') return i === selected ? 'selected' : '';
@@ -23,6 +23,7 @@ const QuestionCard = ({ question, index, total, status, selected, onSelect }) =>
             letter={LETTERS[i]}
             text={option}
             state={getState(i)}
+            hidden={hidden.includes(i)}
             disabled={status !== 'answering'}
             onClick={() => onSelect(i)}
           />
