@@ -1,0 +1,5 @@
+.app { padding: 16px; }
+table { border-collapse: collapse; margin: 8px 0; }
+th, td { border: 1px solid #ccc; padding: 4px 8px; }
+[role="alert"] { color: #c62828; font-size: 13px; }
+section { margin-bottom: 24px; }
