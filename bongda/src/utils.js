@@ -13,7 +13,6 @@ export const isValidGoals = (n) =>
   Number.isInteger(n) && n >= 0 && n <= MAX_GOALS;
 
 export const calcStandings = (matches) => {
-  // luôn đủ 6 đội, tạo mảng MỚI
   const rows = TEAMS.map((t) => ({
     id: t.id, name: t.name,
     played: 0, won: 0, drawn: 0, lost: 0,
@@ -61,4 +60,26 @@ export const calcMatchStats = (matches) => {
   const count = matches.length;
   const average = count === 0 ? 0 : Math.round((goals / count) * 100) / 100;
   return { count, goals, average, counts };
+};
+
+export const calcNeeded = (standings, teamId, target, remaining) => {
+  const INVALID = 'Hãy chọn đội, nhập số điểm mục tiêu (từ 0) và số trận còn lại (từ 1)';
+  const team = standings.find((t) => String(t.id) === String(teamId));
+  const targetNum = target === '' ? NaN : Number(target);
+  const remainingNum = remaining === '' ? NaN : Number(remaining);
+
+  if (
+    !team ||
+    !Number.isInteger(targetNum) || targetNum < 0 ||
+    !Number.isInteger(remainingNum) || remainingNum < 1
+  ) {
+    return INVALID;
+  }
+
+  const need = targetNum - team.points;
+  if (need <= 0) return 'Đội đã đạt mục tiêu';
+  if (need > POINTS.win * remainingNum) return 'Không thể đạt mục tiêu này';
+
+  const wins = Math.max(0, Math.ceil((need - remainingNum) / 2));
+  return `Cần thêm ${need} điểm ở ${remainingNum} trận còn lại, tối thiểu ${wins} trận thắng`;
 };
