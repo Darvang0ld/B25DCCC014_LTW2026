@@ -12,3 +12,10 @@ section { margin-bottom: 24px; }
   background: #2e7d32; color: #fff;
   padding: 8px 12px; border-radius: 4px; z-index: 10;
 }
+
+.bar {
+  display: inline-block;
+  height: 10px;
+  background: #1976d2;
+  margin-left: 8px;
+}
